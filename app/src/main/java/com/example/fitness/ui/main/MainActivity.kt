@@ -1,9 +1,8 @@
-package com.example.fitness
+package com.example.fitness.ui.main
 
 import android.os.Bundle
+import com.example.fitness.R
 import com.example.fitness.base.BaseMapActivity
-import com.mapbox.mapboxsdk.maps.MapboxMap
-import com.mapbox.mapboxsdk.maps.Style
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMapActivity() {

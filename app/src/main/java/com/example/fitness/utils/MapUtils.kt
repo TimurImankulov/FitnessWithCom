@@ -1,12 +1,9 @@
 package com.example.fitness.utils
 
 import android.graphics.Color
-import android.graphics.drawable.AnimatedImageDrawable
 import android.graphics.drawable.Drawable
 import android.location.Location
 import com.example.fitness.BuildConfig
-import com.example.fitness.R
-import com.example.fitness.base.BaseMapActivity
 import com.mapbox.api.directions.v5.DirectionsCriteria
 import com.mapbox.api.directions.v5.MapboxDirections
 import com.mapbox.api.directions.v5.models.DirectionsResponse
