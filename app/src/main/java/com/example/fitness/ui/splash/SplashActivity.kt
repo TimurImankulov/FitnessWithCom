@@ -8,6 +8,7 @@ import com.example.fitness.R
 import com.example.fitness.data.PreferenceHelper
 import com.example.fitness.ui.main.MainActivity
 import com.example.fitness.ui.onboard.OnBoardActivity
+import com.example.fitness.utils.launchActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,10 +21,10 @@ class SplashActivity : AppCompatActivity() {
 
     private fun selectActivity() {
         if (PreferenceHelper.getIsFirstLaunch()) {
-            startActivity(Intent(this, OnBoardActivity::class.java))
+            launchActivity<OnBoardActivity>()
             finish()
         } else {
-            startActivity(Intent(this, MainActivity::class.java))
+            launchActivity<MainActivity>()
             finish()
         }
     }

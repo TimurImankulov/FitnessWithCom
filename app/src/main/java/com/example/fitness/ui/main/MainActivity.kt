@@ -3,6 +3,7 @@ package com.example.fitness.ui.main
 import android.os.Bundle
 import com.example.fitness.R
 import com.example.fitness.base.BaseMapActivity
+import com.example.fitness.utils.showLongToast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMapActivity() {
@@ -17,6 +18,7 @@ class MainActivity : BaseMapActivity() {
 
     private fun setupListeners() {
         fab.setOnClickListener{
+            showLongToast(R.string.app_name)
         }
     }
 }
