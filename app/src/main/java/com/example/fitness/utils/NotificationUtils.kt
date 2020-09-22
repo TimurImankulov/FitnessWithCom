@@ -1,4 +1,4 @@
-package com.example.fitness.data
+package com.example.fitness.utils
 
 import android.app.*
 import android.content.Context
@@ -8,6 +8,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.fitness.MainActivity2
 import com.example.fitness.R
+import com.example.fitness.ui.main.MainActivity
 
 object NotificationUtils {
 
@@ -20,21 +21,27 @@ object NotificationUtils {
         title: String?,
         body: String?
     ) {
-        createNotificationChannel(context)
-
-        val intent = Intent(context, MainActivity2::class.java)
+        createNotificationChannel(
+            context
+        )
 
         val pIntent = TaskStackBuilder.create(context)
-            .addNextIntentWithParentStack(intent)
+            .addNextIntent(Intent(context,MainActivity::class.java))
+            .addNextIntent(Intent(context,MainActivity2::class.java))
             .getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT)
 
-        val builder = NotificationCompat.Builder(context, CHANNEL_ID)
+        val builder = NotificationCompat.Builder(context,
+            CHANNEL_ID
+        )
             .setContentTitle(title)
             .setContentText(body)
             .setContentIntent(pIntent)
             .setSmallIcon(R.drawable.ic_baseline_accessibility_new_24)
             .build()
-        showNotification(builder, context)
+        showNotification(
+            builder,
+            context
+        )
     }
 
     fun showNotification(builder: Notification, context: Context) {
@@ -44,8 +51,11 @@ object NotificationUtils {
     private fun createNotificationChannel(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val importance = NotificationManager.IMPORTANCE_HIGH
-            val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, importance)
-            channel.description = CHANNEL_DESC
+            val channel = NotificationChannel(
+                CHANNEL_ID,
+                CHANNEL_NAME, importance)
+            channel.description =
+                CHANNEL_DESC
 
             val notificationManager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

@@ -19,5 +19,5 @@ object PreferenceHelper {
         preference?.edit()?.putBoolean(IS_FIRST_LAUNCH,false)?.apply()
     }
 
-    fun getIsFirstLaunch() = preference?.getBoolean(IS_FIRST_LAUNCH,true) ?: true  //?
+    fun getIsFirstLaunch() = preference?.getBoolean(IS_FIRST_LAUNCH,true) ?: true
 }

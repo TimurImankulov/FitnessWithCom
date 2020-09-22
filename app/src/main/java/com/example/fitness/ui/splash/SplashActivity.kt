@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import com.example.fitness.R
 import com.example.fitness.data.PreferenceHelper
 import com.example.fitness.ui.main.MainActivity
@@ -17,6 +18,7 @@ class SplashActivity : AppCompatActivity() {
         Handler().postDelayed({
             selectActivity()
         }, 3000)
+
     }
 
     private fun selectActivity() {

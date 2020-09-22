@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:allowBackup="true"
@@ -24,7 +25,9 @@
         <activity
             android:name=".MainActivity2"
             android:parentActivityName=".ui.main.MainActivity" />
-        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.main.MainActivity" >
+
+        </activity>
 
         <service
             android:name=".data.MyFirebaseMessagingService"
@@ -33,6 +36,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <service android:name=".ui.MyLocationForegroundService"/>
     </application>
 
 </manifest>

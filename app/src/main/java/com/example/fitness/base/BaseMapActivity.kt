@@ -2,6 +2,8 @@ package com.example.fitness.base
 
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.os.Handler
+import android.os.Looper
 import com.example.fitness.R
 import com.example.fitness.utils.MapUtils
 import com.example.fitness.utils.PermissionUtils
@@ -116,17 +118,19 @@ abstract class BaseMapActivity : SupportMapActivity() {
 
 
     private fun animateCamera(latLng: LatLng, zoom: Double = CAMERA_ZOOM) {
-        map?.animateCamera(
-            MapUtils.getCameraPosition(latLng, zoom),
-            CAMERA_DURATION
-        )
+        Handler(Looper.getMainLooper()).postDelayed({
+            map?.animateCamera(
+                MapUtils.getCameraPosition(latLng, zoom),
+                CAMERA_DURATION
+            )
+        }, 1000)
     }
 
     companion object {
         private const val MARKER_IMAGE = "MARKER_IMAGE"
         private const val LINE_SOURCE = "LINE_SOURCE"
         private const val LINE_LAYER = "LINE_LAYER"
-        private const val CAMERA_DURATION = 3000
+        private const val CAMERA_DURATION = 6000
         private const val CAMERA_ZOOM = 17.0
     }
 }

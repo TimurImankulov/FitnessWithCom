@@ -1,5 +1,6 @@
 package com.example.fitness.data
 
+import com.example.fitness.utils.NotificationUtils
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
