@@ -18,3 +18,6 @@ fun Context.showShortToast(text:Int){
 fun Context.showLongToast(text:Int){
     Toast.makeText(this,resources.getString(text), Toast.LENGTH_LONG).show()
 }
+
+//showLongToast("текст")
+//showLongToast(R.string.app_name)

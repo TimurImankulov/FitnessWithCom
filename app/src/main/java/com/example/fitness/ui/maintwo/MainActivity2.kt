@@ -1,7 +1,8 @@
-package com.example.fitness
+package com.example.fitness.ui.maintwo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.fitness.R
 
 class MainActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

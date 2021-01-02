@@ -2,4 +2,13 @@
     <string name="app_name">Fitness</string>
     <string name="next">Next</string>
     <string name="splash_activity">Splash Activity</string>
+    <string name="start_time">Время начала: %1s</string>
+    <string name="end_time">Время окончания: %1s</string>
+    <string name="distance">Расстояние: %1s километров</string>
+    <string name="first_title">Узнавай новости\nиз мира самбо</string>
+    <string name="second_title">Учись у лучших\nспортсменов</string>
+    <string name="third_title">Стань частью\nсообщества</string>
+    <string name="proceed">Продолжить</string>
+    <string name="skip">Пропустить</string>
+
 </resources>

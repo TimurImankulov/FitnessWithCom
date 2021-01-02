@@ -8,30 +8,30 @@ import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
 
-abstract class SupportMapActivity:AppCompatActivity() {
+abstract class SupportMapActivity:AppCompatActivity() {//Базовый класс для других активити в которых будет использоваться карта, все его методы реализуются в классе наследнике
 
-    abstract fun getResId(): Int
-    abstract fun getMapViewId(): Int
+    abstract fun getResId(): Int // для подвязки верстки в дочерних классах
+    abstract fun getMapViewId(): Int // для подвязки mapView в дочерних классах
     abstract fun onMapLoaded(mapBoxMap: MapboxMap, style: Style)
 
-    protected var mapView: MapView? = null
-    protected var map: MapboxMap? = null
+    protected var mapView: MapView? = null // контейнер для карты
+    protected var map: MapboxMap? = null //карта
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Mapbox.getInstance(applicationContext, BuildConfig.API_KEY_MAPS)
+        Mapbox.getInstance(applicationContext, BuildConfig.API_KEY_MAPS) // подключаем карту до загрузки setContentView()
         setContentView(getResId())
         mapView = findViewById(getMapViewId())
-        mapView?.onCreate(savedInstanceState)
+        mapView?.onCreate(savedInstanceState) // чтобы карта работала при перевороте экрана
 
-        mapView?.getMapAsync { mapBoxMap -> // Подгружает карту, стиль для карты, слушателя для получение координат, подгружает картинку для маркера
-            map = mapBoxMap                            // подгружает SymbolManager, проверяет наличие permissions и подгружает местоположение пользователя
+        mapView?.getMapAsync { mapBoxMap -> // Подгружает карту в асинхронном потоке чтобы не блокировать основной поток, стиль для карты
+            map = mapBoxMap                            // переменной map приравниваем mapBoxMap, карту которую мы подгружаем
             mapBoxMap.setStyle(Style.LIGHT) { style ->
-                onMapLoaded(mapBoxMap,style)
-            }
+                onMapLoaded(mapBoxMap,style)         // вызовится после загрузке карты, и подгрузит стиль, ресурс для линии, клик и картинку для маркера
+            }                                        // вынесли в этот класс как boilerplate, SupportMapActivity предназначен только для загрузки карты, как шаблон
         }
     }
-
+// подключаем mapView ко всем жизненным циклам чтобы карта знала о происходящих событиях
     override fun onStart() {
         super.onStart()
         mapView?.onStart()
@@ -61,6 +61,4 @@ abstract class SupportMapActivity:AppCompatActivity() {
         super.onDestroy()
         mapView?.onDestroy()
     }
-
-
 }

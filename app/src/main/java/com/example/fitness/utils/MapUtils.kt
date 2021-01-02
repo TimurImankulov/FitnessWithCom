@@ -23,16 +23,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-object MapUtils {
+object MapUtils { // сюда выносим некоторые методы работы с картой чтобы разгрузить BaseMapActivity, через callBack возвращаем их BaseMapActivity
 
-    fun getDirections(
+    fun getDirections( // Построение пути от одной точки до другой
         origin: Location?, destination: LatLng,
-        result: ((item: DirectionsRoute?) -> Unit)? = null
+        result: ((item: DirectionsRoute?) -> Unit)? = null  // метод с callBack, с отсроченным результатом, этот метод возвращает значение только не сразу, когда сможет
     ) {
         val client = MapboxDirections.builder()
             .accessToken(BuildConfig.API_KEY_MAPS)
-            .origin(Point.fromLngLat(origin?.longitude ?: 0.0, origin?.latitude ?: 0.0))
-            .destination(Point.fromLngLat(destination.longitude, destination.latitude))
+            .origin(Point.fromLngLat(origin?.longitude ?: 0.0, origin?.latitude ?: 0.0)) // начальная точка
+            .destination(Point.fromLngLat(destination.longitude, destination.latitude))                    // конечная точка
             .profile(DirectionsCriteria.PROFILE_WALKING)
             .build()
 
@@ -41,7 +41,7 @@ object MapUtils {
                 call: Call<DirectionsResponse>,
                 response: Response<DirectionsResponse>
             ) {
-                val currentRoute = response.body()?.routes()?.first()
+                val currentRoute = response.body()?.routes()?.first() // берем первый маршрут из всех возможных
                 result?.invoke(currentRoute)
             }
 
@@ -50,7 +50,7 @@ object MapUtils {
         })
     }
 
-    fun createLayer(
+    fun createLayer( // Настройка стиля для линии от одной точки до другой, параметры метода по DEFAULT, можно переопределить через синие подсказки
         layerName: String,
         sourceName: String,
         lineCap: String = Property.LINE_CAP_ROUND,
@@ -70,7 +70,7 @@ object MapUtils {
         return layer
     }
 
-    fun addImage(
+    fun addImage( //Загрузка картинки для маркера
         style: Style,
         name: String,
         imageDrawable: Drawable
@@ -82,21 +82,21 @@ object MapUtils {
         )
     }
 
-    fun createSymbol(latLng: LatLng, image: String): SymbolOptions? {
+    fun createSymbol(latLng: LatLng, image: String): SymbolOptions? { // создание маркера
         return SymbolOptions()
             .withLatLng(latLng)
             .withIconImage(image)
     }
 
-    fun getCameraPosition(latLng: LatLng, zoom: Double = 17.0) =
+    fun getCameraPosition(latLng: LatLng, zoom: Double = 17.0) = // делает анимацию наводит на местоположение
         CameraUpdateFactory.newCameraPosition(CameraPosition.Builder()
             .target(latLng)
             .zoom(zoom)
             .build())
 
-    fun locationToLatLng(location: Location?) =
+    fun locationToLatLng(location: Location?) =  // переводит из типа Location в LatLng
         LatLng(location?.latitude ?: 0.0, location?.longitude ?: 0.0)
 
-    fun getSource(sourceName: String) = GeoJsonSource(sourceName)
-    private fun getLayer(layerName: String, sourceName: String) = LineLayer(layerName, sourceName)
+    fun getSource(sourceName: String) = GeoJsonSource(sourceName)  // Ресурс для линии
+    private fun getLayer(layerName: String, sourceName: String) = LineLayer(layerName, sourceName) // возвращает имена LINE_LAYER, LINE_SOURCE для createLayer()
 }

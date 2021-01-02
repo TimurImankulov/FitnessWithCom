@@ -4,17 +4,19 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
+        android:name=".FitnessApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name=".FitnessApp"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.onboard.OnBoardActivity"></activity>
+        <activity android:name=".ui.history.HistoryActivity"></activity>
+        <activity android:name=".ui.onboard.OnBoardActivity" />
         <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,11 +25,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity2"
+            android:name=".ui.maintwo.MainActivity2"
             android:parentActivityName=".ui.main.MainActivity" />
-        <activity android:name=".ui.main.MainActivity" >
-
-        </activity>
+        <activity android:name=".ui.main.MainActivity"></activity>
 
         <service
             android:name=".data.MyFirebaseMessagingService"
@@ -36,7 +36,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".ui.MyLocationForegroundService"/>
+        <service android:name=".ui.MyLocationForegroundService" />
     </application>
 
 </manifest>
